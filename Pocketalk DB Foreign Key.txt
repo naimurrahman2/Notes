@@ -1,0 +1,48 @@
+#Regional DB
+
+
+
+Table                                   Foreign Keys
+
+
+serial_info                             corporation_info
+serial_info_detail                      serial_info, serial_info_status
+serial_group                            serial_info, group_info
+serial_info_master                      no foreign key
+serial_info_status                      no foreign key
+serial_info_status_color_mapping        serial_info_status, color_master
+setting_info                            account_info
+
+
+temp_account_info                       corporation_info, role_info, language_master, account_info_status
+terms_of_use                            no foreign key
+translation_history_control_device      serial_info, translation_history_control_info
+translation_history_control_info        no foreign key
+
+
+remote_device_lost_mode                 serial_info
+remote_restore_factory                  serial_info
+remote_delete_data                      serial_info
+remote_mode_value_device                remote_mode_registry, group_info, serial_info
+remote_setting_common_device            group_info, serial_info
+remote_mode_registry                    no foreign key
+remote_restriction_value                remote_restriction_registry, remote_mode_registry
+
+//wifi setting
+remote_setting_wifi_device              group_info, serial_info, remote_setting_wifi_tls, remote_setting_wifi_peap
+remote_setting_wifi_peap                remote_setting_wifi_group
+remote_setting_wifi_tls                 remote_setting_wifi_group
+remote_setting_wifi_group               remote_setting_wifi_peap, remote_setting_wifi_tls
+
+
+
+
+
+#Global DB
+
+serial_info_master                     master_corporation_info, sales_region_info, server_region_info, master_device_mode
+master_corporation_info                bo_corporation_info_status, server_region_info
+sales_region_info                      no foreign key
+server_region_info                     engine_server_info
+master_device_mode                     no foreign key
+engine_server_info                     no foreign key
